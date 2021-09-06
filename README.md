@@ -14,7 +14,7 @@ Our goal to implement a software which basically implements a solution for this 
 
 ## Prototype
 
-The prototype of our mobile app can be found in folder `prototype`.
+The prototype of our mobile app can be found [here](https://miro.com/app/board/o9J_lypqN9k=/).
 
 ## Our team
 - [Du Tham Lieu](https://t.me/niuzi97)
