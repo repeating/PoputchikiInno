@@ -12,6 +12,10 @@ Most of Innopolis residents and workers suffer from the lack of public transport
 
 Our goal to implement a software which basically implements a solution for this problem with many functionalites that make it easy and convinient for people to use.
 
+## Prototype
+
+The prototype of our mobile app can be found in folder `prototype`.
+
 ## Our team
 - [Du Tham Lieu](https://t.me/niuzi97)
 - [Fadi Younes](https://t.me/fadi_yn)

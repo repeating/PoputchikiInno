@@ -7,6 +7,7 @@ pip install -r requirements.txt
 ```
 
 ## How to run 
+
 Open terminal in the directory `<cloned_folder>/backend` and type:
 ```
 python manage.py runserver
