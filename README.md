@@ -1,4 +1,4 @@
-# hitchhiking_app
+# Poputchiki Innopolis
 
 <img src="https://raw.githubusercontent.com/yegor256/ssd16/master/innopolis-logo.svg" height="48px" href="https://innopolis.university/en/"/>
 
