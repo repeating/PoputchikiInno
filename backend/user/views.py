@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, response
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.views import generic
@@ -27,10 +27,12 @@ def home(request):
     return render(request, 'user/home.html', {'data' : 'data'})
 
 def login(request):
-    if request.method == 'GET':
-        form = ProfileLogInForm(data=request.GET)
+    if request.method == 'POST':
+        form = ProfileLogInForm(data=request.POST)
         if form.is_valid():
-            return redirect('../user/home')
+            return HttpResponse({'message': 'valid'})
+        else:
+            return HttpResponse({'invalid': 'invalid'})
     else:
         form = ProfileLogInForm()
     return render(request, 'user/login.html', {'form' : form})
