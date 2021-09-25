@@ -3,20 +3,28 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, Abstr
 from django.utils import timezone
 from django.utils.translation import gettext as _
 from django import forms
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
+from phonenumber_field.modelfields import PhoneNumberField
 
-# Create your models here.
-class User(AbstractUser):
-    REQUIRED_FIELDS = ['email']
-    password = models.CharField(max_length=50)
-    first_name = models.CharField(_('first name'), max_length=150)
-    last_name = models.CharField(_('last name'), max_length=150)
-    email = models.EmailField(_('email address'))
-    user_type_choices = [
-        ('drive', 'driver'),
-        ('passenger', 'passenger')
-    ]
-    user_type = models.CharField(
-        max_length=9,
-        choices=user_type_choices,
-        default='admin'
-    )
+
+class Profile(User):
+    class Meta:
+        verbose_name = _('username')
+        verbose_name_plural = _('profiles')
+
+    mobile_number = PhoneNumberField(null=False, blank=False, unique=True)
+
+    def __str__(self):
+        return f'{self.username} Profile'
+
+class Driver(Profile):
+    class Meta:
+        verbose_name = _('username')
+        verbose_name_plural = _('drivers')
+
+    pass
+
+class Passenger(Profile):
+    pass

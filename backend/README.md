@@ -10,6 +10,7 @@ pip install -r requirements.txt
 
 Open terminal in the directory `<cloned_folder>/backend` and type:
 ```
+python manage.py migrate
 python manage.py runserver
 ```
 The server will run on `localhost:8000`
