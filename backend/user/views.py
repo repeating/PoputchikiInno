@@ -1,3 +1,4 @@
+from django import http
 from django.http import HttpResponseRedirect, response
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
@@ -43,10 +44,12 @@ def register(request):
         if form.is_valid():
             form.save()
             messages.success(request, f'Your account has been created! You are now able to log in')
-            return redirect('../../user/home')
+            return HttpResponse ( {'token': form.user_name} )
+        else :
+            return HttpResponse({'token': ''})
     else :
         form = ProfileRegisterForm()
-    return render(request , 'user/register.html' , {'form':form} )
+    return render(request , 'user/register.html' , {'form': form } )
 
 
 def logout(request, user_id):
