@@ -92,34 +92,40 @@ const SignInScreen = ({navigation}) => {
         }
     }
 
-    const loginHandle = (userName, password) => {
+    const loginHandle = async (userName, password) => {
+        
+        const response = await fetch('http://localhost:8000/user/login/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    'username': userName, 
+                    'password': password
+                })
+                });
+                
+        let res = await response.json();
 
+        const token = res.token;
 
-        const token = axios.post('https://127.0.0.1:8000/user/login/', { params: { username: userName , password: password } }).then(function (response) {
-            // handle success
-            alert(JSON.stringify(token.data));
-            console.log("Token is:",token.data)
-          })
-          .catch(function (error) {
-            // handle error
-            alert(error.message);
-            console.log("Token is:",token.data)
-          });
-
-
+        console.log(token)
+        console.log(token.length)
     //    const foundUser = Users.filter( item => {
      //       return userName == item.username && password == item.password;
       //  } );
         
 
-        if ( data.username.length == 0 || data.password.length == 0 ) {
+        if ( userName.length == 0 || password.length == 0 ) {
             Alert.alert('Wrong Input!', 'Username or password field cannot be empty.', [
                 {text: 'Okay'}
             ]);
+            console.log("I'm zuby")
             return;
         }
 
-        if ( token.length == 0 ) {
+        if ( token == '' ) {
             Alert.alert('Invalid User!', 'Username or password is incorrect.', [
                 {text: 'Okay'}
             ]);
@@ -130,6 +136,17 @@ const SignInScreen = ({navigation}) => {
         Users.push(foundUser)
         signIn(foundUser);
     }
+    const getToken = async () => {
+        try {
+          const response = await fetch(
+            'https://reactnative.dev/movies.json'
+          );
+          const json = await response.json();
+          return json.data;
+        } catch (error) {
+          console.error(error);
+        }
+      };
 
     return (
       <View style={styles.container}>
