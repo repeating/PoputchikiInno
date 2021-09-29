@@ -16,14 +16,14 @@ from django.contrib.auth import get_user_model
 from rest_framework.permissions import BasePermission, IsAuthenticated, SAFE_METHODS
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .forms import ProfileRegisterForm , ProfileLogInForm
+from .forms import ProfileSignupForm , ProfileLogInForm
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import parser_classes
 import json
 from .models import Profile
 import ast
-
+from django.contrib.auth import authenticate
 
 User = get_user_model()
 
@@ -43,8 +43,8 @@ def home(request):
 def login(request):
     if request.method == 'POST':
         data = ast.literal_eval(request.body.decode())
-        users = User.objects.all().filter(username=data['username'])
-        if len(users) == 1 and users[0].password == data['password']:
+        user = authenticate(username=data['username'], password=data['password'])
+        if user is not None:
             return JsonResponse({'token': data['username']})
         else:
             return JsonResponse({'token': ''})
@@ -52,17 +52,20 @@ def login(request):
         form = ProfileLogInForm()
     return render(request, 'user/login.html', {'form' : form})
 
-def register(request):
+@csrf_exempt
+def signup(request):
     if request.method == 'POST':
-        form = ProfileRegisterForm(request.body)
-        if form.is_valid():
-            form.save()
-            messages.success(request, f'Your account has been created! You are now able to log in')
-            #return redirect('../../user/home')
-            return JsonResponse({'token': request.body['username']})
+        data = ast.literal_eval(request.body.decode())
+        user = Profile.objects.create_user(username=data['username'],
+                                           password=data['password'],
+                                           first_name=data['first_name'],
+                                           last_name=data['last_name'],
+                                           email=data['email'],
+                                           mobile_number=data['mobile_number'])
+        return JsonResponse({'token': user.username})
     else :
-        form = ProfileRegisterForm()
-    return render(request , 'user/register.html' , {'form': form})
+        form = ProfileSignupForm()
+    return render(request , 'user/signup.html' , {'form': form})
 
 
 def logout(request, user_id):

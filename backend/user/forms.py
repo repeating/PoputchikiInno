@@ -6,7 +6,7 @@ from django.contrib.auth.hashers import make_password
 from .models import Profile
 
 
-class ProfileRegisterForm(UserCreationForm):
+class ProfileSignupForm(UserCreationForm):
     email = forms.EmailField()
     class Meta:
         model = Profile

@@ -74,7 +74,7 @@ const SignUpScreen = ({navigation}) => {
     const signupHandle = (userName, password, confirm_password) => {
 
 
-        const token = axios.post('https://127.0.0.1:8000/user/signup/', { params: { username: userName , password: password } }).then(function (response) {
+        const token = axios.post('https://127.0.0.1:8000/user/signup', { params: { username: userName , password: password } }).then(function (response) {
             // handle success
             alert(JSON.stringify(token.data));
             console.log("Token is:",token.data)
