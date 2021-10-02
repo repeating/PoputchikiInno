@@ -42,13 +42,11 @@ def home(request):
 @csrf_exempt
 def login(request):
     if request.method == 'POST':
-        #data = ast.literal_eval(request.body.decode())
         u_name = request.POST.get('username')
         u_pass = request.POST.get('password')
-        print(u_name, u_pass )
         user = authenticate(username=u_name, password=u_pass)
         if user is not None:
-            return JsonResponse({'token': data['username']})
+            return JsonResponse({'token': u_name})
         else:
             return JsonResponse({'token': ''})
     else:
