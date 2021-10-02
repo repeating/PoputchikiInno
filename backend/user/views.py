@@ -42,8 +42,11 @@ def home(request):
 @csrf_exempt
 def login(request):
     if request.method == 'POST':
-        data = ast.literal_eval(request.body.decode())
-        user = authenticate(username=data['username'], password=data['password'])
+        #data = ast.literal_eval(request.body.decode())
+        u_name = request.POST.get('username')
+        u_pass = request.POST.get('password')
+        print(u_name, u_pass )
+        user = authenticate(username=u_name, password=u_pass)
         if user is not None:
             return JsonResponse({'token': data['username']})
         else:
