@@ -44,6 +44,7 @@ def login(request):
     if request.method == 'POST':
         u_name = request.POST.get('username')
         u_pass = request.POST.get('password')
+        print(u_name,u_pass)
         user = authenticate(username=u_name, password=u_pass)
         if user is not None:
             return JsonResponse({'token': u_name})
@@ -55,7 +56,6 @@ def login(request):
 
 @csrf_exempt
 def signup(request):
-    print("Hello world!")
     if request.method == 'POST':
         user = Profile.objects.create_user(username= request.POST.get('username') ,
                                            password=request.POST.get('password'),
