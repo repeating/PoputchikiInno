@@ -93,7 +93,7 @@ const SignInScreen = ({navigation}) => {
 
     const loginHandle = async (userName, password) => {
         
-        const response = await fetch('http://localhost:8000/user/login', {
+        const response = await fetch('http://localhost:8000/user/login/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
