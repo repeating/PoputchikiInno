@@ -58,7 +58,7 @@ def login(request):
 def signup(request):
     if request.method == 'POST':
         user = Profile.objects.create_user(username= request.POST.get('username') ,
-                                           password=request.POST.get('password'),
+                                           password=request.POST.get('password1'),
                                            first_name= request.POST.get('first_name') ,
                                            last_name= request.POST.get('last_name') ,
                                            email=request.POST.get('email'),
