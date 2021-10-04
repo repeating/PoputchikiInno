@@ -1,10 +1,11 @@
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, JsonResponse
 from django.template import loader
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 
+from .forms import CarTripCreationForm
 from .models import CarTrip
-
+import ast
 
 
 class IndexView(generic.ListView):
@@ -18,6 +19,21 @@ class IndexView(generic.ListView):
 class DetailView(generic.DetailView):
     model = CarTrip
     template_name = 'trips/detail.html'
+
+
+
+def create(request):
+    if request.method == 'POST':
+        trip = CarTrip.create(driver_name=request.POST.get('driver_name'),
+                              destination=request.POST.get('destination'),
+                              number_of_seats=request.POST.get('number_of_seats'))
+        trip.save()
+
+        return JsonResponse({'token': request.POST.get('driver_name') })
+    else :
+        form = CarTripCreationForm()
+    return render(request , 'trips/create.html' , {'form':form})
+
 
 
 def index(request):
