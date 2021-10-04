@@ -121,9 +121,19 @@ const App = () => {
       }
       dispatch({ type: 'LOGOUT' });
     },
-    signUp: () => {
+    signUp: async(foundUser) => {
       // setUserToken('fgkj');
       // setIsLoading(false);
+      const userToken = String(foundUser.userToken);
+      const userName = foundUser.username;
+      
+      try {
+        await AsyncStorage.setItem('userToken', userToken);
+      } catch(e) {
+        console.log(e);
+      }
+      // console.log('user token: ', userToken);
+      dispatch({ type: 'LOGIN', id: userName, token: userToken });
     },
     toggleTheme: () => {
       setIsDarkTheme( isDarkTheme => !isDarkTheme );

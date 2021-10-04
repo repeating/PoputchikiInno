@@ -9,36 +9,115 @@ import {
     Platform,
     StyleSheet,
     ScrollView,
-    StatusBar
+    StatusBar,
+    Alert
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { LinearGradient } from 'expo-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 
+import { AuthContext } from '../components/context';
+
+import Users from '../model/users';
+
 const SignUpScreen = ({navigation}) => {
+
+    const { signUp } = React.useContext(AuthContext);
 
     const [data, setData] = React.useState({
         username: '',
+        first_name: '',
+        last_name: '',
+        email: '',
+        mobile_number: '',
         password: '',
         confirm_password: '',
-        check_textInputChange: false,
+        check_usernameChange: false,
+        check_firstnameChange: false,
+        check_lastnameChange: false,
+        check_emailChange: false,
+        check_mobileChange: false,
         secureTextEntry: true,
         confirm_secureTextEntry: true,
     });
 
-    const textInputChange = (val) => {
+    const username_Change = (val) => {
         if( val.length !== 0 ) {
             setData({
                 ...data,
                 username: val,
-                check_textInputChange: true
+                check_usernameChange: true
             });
         } else {
             setData({
                 ...data,
                 username: val,
-                check_textInputChange: false
+                check_usernameChange: false
+            });
+        }
+    }
+
+    const first_name_Change = (val) => {
+        if( val.length !== 0 ) {
+            setData({
+                ...data,
+                first_name: val,
+                check_firstnameChange: true
+            });
+        } else {
+            setData({
+                ...data,
+                first_name: val,
+                check_firstnameChange: false
+            });
+        }
+    }
+
+    const last_name_Change = (val) => {
+        if( val.length !== 0 ) {
+            setData({
+                ...data,
+                last_name: val,
+                check_lastnameChange: true
+            });
+        } else {
+            setData({
+                ...data,
+                last_name: val,
+                check_lastnameChange: false
+            });
+        }
+    }
+
+    const email_Change = (val) => {
+        if( val.length !== 0 ) {
+            setData({
+                ...data,
+                email: val,
+                check_emailChange: true
+            });
+        } else {
+            setData({
+                ...data,
+                email: val,
+                check_emailChange: false
+            });
+        }
+    }
+
+    const mobile_Change = (val) => {
+        if( val.length !== 0 ) {
+            setData({
+                ...data,
+                mobile_number: val,
+                check_mobileChange: true
+            });
+        } else {
+            setData({
+                ...data,
+                mobile_number: val,
+                check_mobileChange: false
             });
         }
     }
@@ -71,21 +150,40 @@ const SignUpScreen = ({navigation}) => {
         });
     }
 
-    const signupHandle = (userName, password, confirm_password) => {
+    const signupHandle = async (userName, firstName, lastName, user_email, phone_number, password, confirm_password) => {
 
+        console.log(userName)
 
-        const token = axios.post('https://127.0.0.1:8000/user/signup', { params: { username: userName , password: password } }).then(function (response) {
-            // handle success
-            alert(JSON.stringify(token.data));
-            console.log("Token is:",token.data)
-          })
-          .catch(function (error) {
-            // handle error
-            alert(error.message);
-            console.log("Token is:",token.data)
-          });
+        if ( confirm_password != password ) {
+            Alert.alert('Wrong Input!', 'Confirmed password does not match password',[
+                {text: 'Okay'}
+            ]);
+            return;
+        }
 
+        const response = await fetch('http://127.0.0.1:8000/user/signup/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    'username': userName,
+                    'password': password,
+                    'first_name': firstName,
+                    'last_name': lastName,
+                    'email': user_email,
+                    'mobile_number': phone_number 
+                })
+                });
+        console.log(lastName)
 
+        let res = await response.json();
+
+        const token = res.token;
+        
+        console.log(token)
+        console.log(token.length)
     //    const foundUser = Users.filter( item => {
      //       return userName == item.username && password == item.password;
       //  } );
@@ -98,12 +196,6 @@ const SignUpScreen = ({navigation}) => {
             return;
         }
 
-        if ( data.confirm_password.length == 0 ) {
-            Alert.alert('Wrong Input!', 'Confirmed password does not match password',[
-                {text: 'Okay'}
-            ]);
-            return;
-        }
 
         if ( token.length == 0 ) {
             Alert.alert('Invalid User!', 'Username or password is incorrect.', [
@@ -112,9 +204,9 @@ const SignUpScreen = ({navigation}) => {
             return;
         }
 
-        const foundUser = { id: 1 , email:"aaa@gmail.com"  , username: userName , password: password , userToken: token.data };
+        const foundUser = { id: 1 , email:Email  , username: userName , password: password , userToken: token.data };
         Users.push(foundUser)
-        signIn(foundUser);
+        signUp(foundUser);
     }
 
     return (
@@ -139,9 +231,113 @@ const SignUpScreen = ({navigation}) => {
                     placeholder="Your Username"
                     style={styles.textInput}
                     autoCapitalize="none"
-                    onChangeText={(val) => textInputChange(val)}
+                    onChangeText={(val) => username_Change(val)}
                 />
-                {data.check_textInputChange ? 
+                {data.check_usernameChange ? 
+                <Animatable.View
+                    animation="bounceIn"
+                >
+                    <Feather 
+                        name="check-circle"
+                        color="green"
+                        size={20}
+                    />
+                </Animatable.View>
+                : null}
+            </View>
+
+            <Text style={styles.text_footer}>First name</Text>
+            <View style={styles.action}>
+                <FontAwesome 
+                    name="user-o"
+                    color="#05375a"
+                    size={20}
+                />
+                <TextInput 
+                    placeholder="Your first name"
+                    style={styles.textInput}
+                    autoCapitalize="none"
+                    onChangeText={(val) => first_name_Change(val)}
+                />
+                {data.check_firstnameChange ? 
+                <Animatable.View
+                    animation="bounceIn"
+                >
+                    <Feather 
+                        name="check-circle"
+                        color="green"
+                        size={20}
+                    />
+                </Animatable.View>
+                : null}
+            </View>
+
+            <Text style={styles.text_footer}>Last name</Text>
+            <View style={styles.action}>
+                <FontAwesome 
+                    name="user-o"
+                    color="#05375a"
+                    size={20}
+                />
+                <TextInput 
+                    placeholder="Your last name"
+                    style={styles.textInput}
+                    autoCapitalize="none"
+                    onChangeText={(val) => last_name_Change(val)}
+                />
+                {data.check_lastnameChange ? 
+                <Animatable.View
+                    animation="bounceIn"
+                >
+                    <Feather 
+                        name="check-circle"
+                        color="green"
+                        size={20}
+                    />
+                </Animatable.View>
+                : null}
+            </View>
+
+            <Text style={styles.text_footer}>Email</Text>
+            <View style={styles.action}>
+                <FontAwesome 
+                    name="user-o"
+                    color="#05375a"
+                    size={20}
+                />
+                <TextInput 
+                    placeholder="Your email"
+                    style={styles.textInput}
+                    autoCapitalize="none"
+                    onChangeText={(val) => email_Change(val)}
+                />
+                {data.check_emailChange ? 
+                <Animatable.View
+                    animation="bounceIn"
+                >
+                    <Feather 
+                        name="check-circle"
+                        color="green"
+                        size={20}
+                    />
+                </Animatable.View>
+                : null}
+            </View>
+
+            <Text style={styles.text_footer}>Phone number</Text>
+            <View style={styles.action}>
+                <FontAwesome 
+                    name="user-o"
+                    color="#05375a"
+                    size={20}
+                />
+                <TextInput 
+                    placeholder="Your phone number"
+                    style={styles.textInput}
+                    autoCapitalize="none"
+                    onChangeText={(val) => mobile_Change(val)}
+                />
+                {data.check_mobileChange ? 
                 <Animatable.View
                     animation="bounceIn"
                 >
@@ -234,7 +430,7 @@ const SignUpScreen = ({navigation}) => {
             <View style={styles.button}>
                 <TouchableOpacity
                     style={styles.signIn}
-                    onPress={() => {signupHandle( data.username, data.password , data.confirm_password)}}
+                    onPress={() => {signupHandle( data.username, data.password ,data.first_name, data.last_name,data.email, data.mobile_number , data.confirm_password)}}
                 >
                 <LinearGradient
                     colors={['#08d4c4', '#01ab9d']}

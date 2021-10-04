@@ -20,7 +20,6 @@ import { AuthContext } from '../components/context';
 
 import Users from '../model/users';
 
-import axios from 'axios';
 
 const SignInScreen = ({navigation}) => {
 

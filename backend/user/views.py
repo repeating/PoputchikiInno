@@ -55,14 +55,14 @@ def login(request):
 
 @csrf_exempt
 def signup(request):
+    print("Hello world!")
     if request.method == 'POST':
-        data = ast.literal_eval(request.body.decode())
-        user = Profile.objects.create_user(username=data['username'],
-                                           password=data['password'],
-                                           first_name=data['first_name'],
-                                           last_name=data['last_name'],
-                                           email=data['email'],
-                                           mobile_number=data['mobile_number'])
+        user = Profile.objects.create_user(username= request.POST.get('username') ,
+                                           password=request.POST.get('password'),
+                                           first_name= request.POST.get('first_name') ,
+                                           last_name= request.POST.get('last_name') ,
+                                           email=request.POST.get('email'),
+                                           mobile_number=request.POST.get('mobile_number'))
         return JsonResponse({'token': user.username})
     else :
         form = ProfileSignupForm()
