@@ -130,22 +130,11 @@ const SignInScreen = ({navigation}) => {
             ]);
             return;
         }
-
+        
         const foundUser = { id: 1 , email:"aaa@gmail.com"  , username: userName , password: password , userToken: token.data };
         Users.push(foundUser)
         signIn(foundUser);
     }
-    const getToken = async () => {
-        try {
-          const response = await fetch(
-            'https://reactnative.dev/movies.json'
-          );
-          const json = await response.json();
-          return json.data;
-        } catch (error) {
-          console.error(error);
-        }
-      };
 
     return (
       <View style={styles.container}>

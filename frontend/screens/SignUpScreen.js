@@ -203,7 +203,7 @@ const SignUpScreen = ({navigation}) => {
             return;
         }
 
-        const foundUser = { id: 1 , email:Email  , username: userName , password: password , userToken: token.data };
+        const foundUser = { id: 1 , email:user_email  , username: userName , password: password , userToken: token.data };
         Users.push(foundUser)
         signUp(foundUser);
     }

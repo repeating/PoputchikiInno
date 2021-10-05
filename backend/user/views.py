@@ -42,12 +42,12 @@ def home(request):
 @csrf_exempt
 def login(request):
     if request.method == 'POST':
-        u_name = request.POST.get('username')
-        u_pass = request.POST.get('password')
-        print(u_name,u_pass)
-        user = authenticate(username=u_name, password=u_pass)
+        data = ast.literal_eval(request.body.decode())
+        user = authenticate(username=data['username'], password=data['password'])
+        print(data['username'])
+        print(data['password'])
         if user is not None:
-            return JsonResponse({'token': u_name})
+            return JsonResponse({'token': data['username']})
         else:
             return JsonResponse({'token': ''})
     else:
@@ -57,12 +57,13 @@ def login(request):
 @csrf_exempt
 def signup(request):
     if request.method == 'POST':
-        user = Profile.objects.create_user(username= request.POST.get('username') ,
-                                           password=request.POST.get('password1'),
-                                           first_name= request.POST.get('first_name') ,
-                                           last_name= request.POST.get('last_name') ,
-                                           email=request.POST.get('email'),
-                                           mobile_number=request.POST.get('mobile_number'))
+        data = ast.literal_eval(request.body.decode())
+        user = Profile.objects.create_user(username=data['username'],
+                                           password=data['password'],
+                                           first_name=data['first_name'],
+                                           last_name=data['last_name'],
+                                           email=data['email'],
+                                           mobile_number=data['mobile_number'])
         return JsonResponse({'token': user.username})
     else :
         form = ProfileSignupForm()
