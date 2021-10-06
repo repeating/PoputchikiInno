@@ -92,8 +92,9 @@ const SignInScreen = ({navigation}) => {
     }
 
     const loginHandle = async (userName, password) => {
-        
-        const response = await fetch('http://localhost:8000/user/login/', {
+        const surl = global.url + '/user/login/';
+        console.log(surl);
+        const response = await fetch(surl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -120,7 +121,6 @@ const SignInScreen = ({navigation}) => {
             Alert.alert('Wrong Input!', 'Username or password field cannot be empty.', [
                 {text: 'Okay'}
             ]);
-            console.log("I'm zuby")
             return;
         }
 
@@ -130,7 +130,6 @@ const SignInScreen = ({navigation}) => {
             ]);
             return;
         }
-        
         const foundUser = { id: 1 , email:"aaa@gmail.com"  , username: userName , password: password , userToken: token.data };
         Users.push(foundUser)
         signIn(foundUser);

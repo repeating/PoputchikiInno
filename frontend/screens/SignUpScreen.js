@@ -161,7 +161,9 @@ const SignUpScreen = ({navigation}) => {
             return;
         }
 
-        const response = await fetch('http://127.0.0.1:8000/user/signup/', {
+        const surl = global.url + '/user/signup/';
+
+        const response = await fetch(surl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

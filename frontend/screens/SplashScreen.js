@@ -16,6 +16,13 @@ import { useTheme } from '@react-navigation/native';
 const SplashScreen = ({navigation}) => {
     const { colors } = useTheme();
 
+    const splash = () => {
+        // 127.0.0.1 for web 
+        // 10.0.2.2 for emulator
+        global.url = 'http://10.0.2.2:8000';
+        navigation.navigate('SignInScreen');
+    }
+
     return (
       <View style={styles.container}>
           <StatusBar backgroundColor='#009387' barStyle="light-content"/>
@@ -39,7 +46,7 @@ const SplashScreen = ({navigation}) => {
             }]}>Hitchhiking app!</Text>
             <Text style={styles.text}>Sign in with account</Text>
             <View style={styles.button}>
-            <TouchableOpacity onPress={()=>navigation.navigate('SignInScreen')}>
+            <TouchableOpacity onPress={()=> splash()}>
                 <LinearGradient
                     colors={['#08d4c4', '#01ab9d']}
                     style={styles.signIn}

@@ -102,6 +102,7 @@ const App = () => {
       // setIsLoading(false);
       const userToken = String(foundUser.userToken);
       const userName = foundUser.username;
+      global.Var = userName;
       
       try {
         await AsyncStorage.setItem('userToken', userToken);
@@ -126,6 +127,7 @@ const App = () => {
       // setIsLoading(false);
       const userToken = String(foundUser.userToken);
       const userName = foundUser.username;
+      global.Var = userName;
       
       try {
         await AsyncStorage.setItem('userToken', userToken);
