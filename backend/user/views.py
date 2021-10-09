@@ -24,6 +24,7 @@ import json
 from .models import Profile
 import ast
 from django.contrib.auth import authenticate
+from trips.models import CarTrip
 
 User = get_user_model()
 
@@ -42,12 +43,11 @@ def home(request):
 @csrf_exempt
 def login(request):
     if request.method == 'POST':
-        data = ast.literal_eval(request.body.decode())
-        user = authenticate(username=data['username'], password=data['password'])
-        print(data['username'])
-        print(data['password'])
+        #data = ast.literal_eval(request.body.decode())
+        user = authenticate(username=request.POST.get('username'), password=request.POST.get('password'))
         if user is not None:
-            return JsonResponse({'token': data['username']})
+            #return JsonResponse({'token': data['username']})
+            return JsonResponse({'token': request.POST.get('username')})
         else:
             return JsonResponse({'token': ''})
     else:
@@ -57,6 +57,8 @@ def login(request):
 @csrf_exempt
 def signup(request):
     if request.method == 'POST':
+        '''
+        for front end:   
         data = ast.literal_eval(request.body.decode())
         user = Profile.objects.create_user(username=data['username'],
                                            password=data['password'],
@@ -64,7 +66,18 @@ def signup(request):
                                            last_name=data['last_name'],
                                            email=data['email'],
                                            mobile_number=data['mobile_number'])
+        
         return JsonResponse({'token': user.username})
+        '''
+        user = Profile.objects.create_user(username=request.POST.get('username'),
+                                           password=request.POST.get('password1'),
+                                           first_name=request.POST.get('first_name'),
+                                           last_name=request.POST.get('last_name'),
+                                           email=request.POST.get('email'),
+                                           mobile_number=request.POST.get('mobile_number'))
+
+
+        return JsonResponse({'token': request.POST.get('username')})
     else :
         form = ProfileSignupForm()
     return render(request , 'user/signup.html' , {'form': form})
@@ -72,5 +85,12 @@ def signup(request):
 
 def logout(request, user_id):
     return render(request, 'user/logout.html', {'data': 'data'})
+
+
+def trip_register(request):
+    latest_cartrip_list = CarTrip.objects.all()
+    context = {'latest_cartrip_list': latest_cartrip_list}
+    return render(request, 'trips/trip_register.html', context)
+
 
 

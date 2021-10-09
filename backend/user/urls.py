@@ -1,6 +1,7 @@
 from django.urls import path
 
 from . import views
+from trips.models import CarTrip
 
 app_name = 'user'
 urlpatterns = [
@@ -8,5 +9,6 @@ urlpatterns = [
     path('home/' , views.home , name='home'),
     path('signup/' , views.signup, name='signup'),
     path('<int:pk>/logout/', views.LogOutView.as_view(), name='logout'),
+    #path('<int:profile.id>/trip_register/', views.trip_register , name='trip_register')
 ]
 

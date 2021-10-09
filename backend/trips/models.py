@@ -26,11 +26,11 @@ class CarTrip(models.Model):
     pub_date = models.DateTimeField('date published')
 
     @classmethod
-    def create(cls , driver_name, destination, number_of_seats ):
+    def create(cls , driver_name, destination, number_of_seats, trip_date):
         trip = cls(driver_name= driver_name,
                    destination=destination,
                    number_of_seats=number_of_seats,
-                   trip_date=datetime.now(),
+                   trip_date=trip_date,
                    pub_date=datetime.now()
                    )
 

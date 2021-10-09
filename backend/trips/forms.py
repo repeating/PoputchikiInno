@@ -9,4 +9,4 @@ class CarTripCreationForm(ModelForm):
 
     class Meta:
         model = CarTrip
-        fields = ['driver_name', 'destination' , 'number_of_seats']
+        fields = ['driver_name', 'destination' , 'number_of_seats', 'trip_date']

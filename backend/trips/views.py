@@ -8,13 +8,14 @@ from .models import CarTrip
 import ast
 
 
-class IndexView(generic.ListView):
-    template_name = 'trips/index.html'
-    context_object_name = 'latest_cartrip_list'
-
-    def get_queryset(self):
-        return CarTrip.objects.order_by('-pub_date')[:5]
-
+# class IndexView(generic.ListView):
+#     template_name = 'trips/index.html'
+#     context_object_name = 'latest_cartrip_list'
+#
+#     def get_queryset(self):
+#         print('hi')
+#         return CarTrip.objects.order_by('-pub_date')
+#
 
 class DetailView(generic.DetailView):
     model = CarTrip
@@ -26,7 +27,9 @@ def create(request):
     if request.method == 'POST':
         trip = CarTrip.create(driver_name=request.POST.get('driver_name'),
                               destination=request.POST.get('destination'),
-                              number_of_seats=request.POST.get('number_of_seats'))
+                              number_of_seats=request.POST.get('number_of_seats'),
+                              trip_date=request.POST.get('trip_date')
+                              )
         trip.save()
 
         return JsonResponse({'token': request.POST.get('driver_name') })
@@ -37,8 +40,13 @@ def create(request):
 
 
 def index(request):
-    latest_cartrip_list = CarTrip.objects.order_by('-pub_date')[:5]
-    context = {'latest_cartrip_list': latest_cartrip_list}
+    latest_cartrip_list = CarTrip.objects.order_by('-pub_date')
+    arr = [ ]
+    for t in CarTrip.objects.all() :
+        arr.append({'driver_name': t.driver_name , 'destination': t.destination
+                    , 'number_of_seats':t.number_of_seats, 'pub_date':t.pub_date})
+    context = {'latest_cartrip_list': arr}
+    print(context['latest_cartrip_list'][0]['number_of_seats'])
     return render(request, 'trips/index.html', context)
 
 
