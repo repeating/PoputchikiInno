@@ -3,14 +3,14 @@ from django.template import loader
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
-<<<<<<< Updated upstream
+
 
 from .forms import CarTripCreationForm
 from .models import CarTrip
-=======
+
 from .forms import CarTripCreationForm , RelationCreationForm
 from .models import CarTrip, Relation
->>>>>>> Stashed changes
+
 import ast
 
 
