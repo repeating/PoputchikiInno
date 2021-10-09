@@ -161,7 +161,7 @@ const SignUpScreen = ({navigation}) => {
             return;
         }
 
-        const surl = global.url + '/user/signup/';
+        const surl = 'http://10.0.2.2:8000' + '/user/signup/';
 
         const response = await fetch(surl, {
                 method: 'POST',

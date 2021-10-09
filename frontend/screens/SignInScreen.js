@@ -92,7 +92,7 @@ const SignInScreen = ({navigation}) => {
     }
 
     const loginHandle = async (userName, password) => {
-        const surl = global.url + '/user/login/';
+        const surl = 'http://10.0.2.2:8000' + '/user/login/';
         console.log(surl);
         const response = await fetch(surl, {
                 method: 'POST',

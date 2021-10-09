@@ -48,22 +48,23 @@ const AddNewScreen = ({navigation}) => {
     console.log(dest);
     const userName = global.Var;
     console.log(userName);
-    const day_date = date.getDate() + '/' + date.getMonth() +'/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes(); 
+    const day_date = date.getFullYear() + '-' + date.getMonth() +'-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':00'; 
     console.log(day_date);
     
-    const surl = global.url + '/user/signup/';
+    const surl = 'http://10.0.2.2:8000' + '/trips/create/';
+
 
     const response = await fetch(surl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Accept': 'application/json',
       },
       body: JSON.stringify({
         'driver_name': userName,
         'destination': dest,
         'number_of_seats': seats,
-        'date': date
+        'trip_date': date
         })
         });
   };

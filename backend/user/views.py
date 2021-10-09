@@ -43,11 +43,12 @@ def home(request):
 @csrf_exempt
 def login(request):
     if request.method == 'POST':
-        #data = ast.literal_eval(request.body.decode())
-        user = authenticate(username=request.POST.get('username'), password=request.POST.get('password'))
+        data = ast.literal_eval(request.body.decode())
+        #user = authenticate(username=request.POST.get('username'), password=request.POST.get('password'))
+        user = authenticate(username=data['username'], password=data['password'])
         if user is not None:
-            #return JsonResponse({'token': data['username']})
-            return JsonResponse({'token': request.POST.get('username')})
+            return JsonResponse({'token': data['username']})
+            #return JsonResponse({'token': request.POST.get('username')})
         else:
             return JsonResponse({'token': ''})
     else:
@@ -57,8 +58,8 @@ def login(request):
 @csrf_exempt
 def signup(request):
     if request.method == 'POST':
-        '''
-        for front end:   
+        
+     #   for front end:   
         data = ast.literal_eval(request.body.decode())
         user = Profile.objects.create_user(username=data['username'],
                                            password=data['password'],
@@ -69,15 +70,16 @@ def signup(request):
         
         return JsonResponse({'token': user.username})
         '''
+        for back end:  
         user = Profile.objects.create_user(username=request.POST.get('username'),
                                            password=request.POST.get('password1'),
                                            first_name=request.POST.get('first_name'),
                                            last_name=request.POST.get('last_name'),
                                            email=request.POST.get('email'),
                                            mobile_number=request.POST.get('mobile_number'))
+      
 
-
-        return JsonResponse({'token': request.POST.get('username')})
+        return JsonResponse({'token': request.POST.get('username')})'''
     else :
         form = ProfileSignupForm()
     return render(request , 'user/signup.html' , {'form': form})

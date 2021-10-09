@@ -22,7 +22,7 @@ class CarTrip(models.Model):
     driver_name = models.CharField(max_length=200)
     destination = models.CharField(max_length=200)
     number_of_seats = models.IntegerField('number of seats')
-    trip_date = models.DateTimeField('trip date')
+    trip_date = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
 
     @classmethod
