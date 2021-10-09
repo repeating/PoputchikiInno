@@ -3,9 +3,14 @@ from django.template import loader
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
+<<<<<<< Updated upstream
 
 from .forms import CarTripCreationForm
 from .models import CarTrip
+=======
+from .forms import CarTripCreationForm , RelationCreationForm
+from .models import CarTrip, Relation
+>>>>>>> Stashed changes
 import ast
 
 
@@ -47,6 +52,20 @@ def create(request):
     return render(request , 'trips/create.html' , {'form':form})
 
 
+@csrf_exempt
+def register(request):
+    if request.method == 'POST':
+         name = request.POST.get('hiker_name')
+         number = request.POST.get('trip_number')
+         relation = Relation.create(trip_number=number,
+                                   hiker_name=name,)
+         relation.save()
+         print(name , number )
+
+         return JsonResponse({'token': 'done' })
+    else :
+        form = RelationCreationForm( )
+        return render(request, 'user/login.html', {'form' : form})
 
 def index(request):
     latest_cartrip_list = CarTrip.objects.order_by('-pub_date')
@@ -55,11 +74,18 @@ def index(request):
         t.trip_date = t.trip_date.replace('T',' ')
         size = len(t.trip_date)
         t.trip_date = t.trip_date[:size-8]
+        hikers = []
+        for person in Relation.objects.filter( trip_number = t.id) :
+            hikers.append(person.hiker_name)
         context.append({'driver_name': t.driver_name, 'id': t.id , 'destination': t.destination, 'trip_date': t.trip_date
-                    , 'number_of_seats':t.number_of_seats, 'pub_date':t.pub_date})
+                    , 'number_of_seats':t.number_of_seats, 'pub_date':t.pub_date , 'hikers':hikers} )
     return JsonResponse({'token': context })
 
 
-def detail(request, cartrip_id):
-    cartrip = get_object_or_404(CarTrip, pk=cartrip_id)
-    return render(request, 'polls/detail.html', {'cartrip': cartrip})
+
+#
+# def detail(request, cartrip_id):
+#
+#     cartrip = get_object_or_404(CarTrip, pk=cartrip_id)
+#
+#     return render(request, 'polls/detail.html', {'cartrip': cartrip})

@@ -39,3 +39,21 @@ class CarTrip(models.Model):
     def was_published_recently(self):
         return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
 
+
+class Relation(models.Model):
+    class Meta:
+        verbose_name = _('relation')
+        verbose_name_plural = _('relation')
+
+    trip_number = models.IntegerField('trip_number')
+    hiker_name = models.CharField(max_length=200)
+
+    def __str__(self ):
+        return f'{self.hiker_name} going on trip id id = {self.trip_number}'
+
+    @classmethod
+    def create(cls , trip_number, hiker_name):
+        rel = cls(trip_number=trip_number,
+                   hiker_name=hiker_name,
+                   )
+        return rel
