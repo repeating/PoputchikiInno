@@ -43,7 +43,7 @@ def index(request):
     latest_cartrip_list = CarTrip.objects.order_by('-pub_date')
     arr = [ ]
     for t in CarTrip.objects.all() :
-        arr.append({'driver_name': t.driver_name , 'destination': t.destination
+        arr.append({'driver_name': t.driver_name , 'destination': t.destination, 'trip_date': t.trip_date
                     , 'number_of_seats':t.number_of_seats, 'pub_date':t.pub_date})
     context = {'latest_cartrip_list': arr}
     return JsonResponse({'token': context})
