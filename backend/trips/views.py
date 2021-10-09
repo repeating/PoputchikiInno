@@ -46,8 +46,7 @@ def index(request):
         arr.append({'driver_name': t.driver_name , 'destination': t.destination
                     , 'number_of_seats':t.number_of_seats, 'pub_date':t.pub_date})
     context = {'latest_cartrip_list': arr}
-    print(context['latest_cartrip_list'][0]['number_of_seats'])
-    return render(request, 'trips/index.html', context)
+    return JsonResponse({'token': context})
 
 
 def detail(request, cartrip_id):
