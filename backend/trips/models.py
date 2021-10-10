@@ -7,8 +7,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
-import datetime
-from dateutil.relativedelta import relativedelta
+from datetime import datetime
 
 class CarTrip(models.Model):
     class Meta:
