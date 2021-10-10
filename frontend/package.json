@@ -8,10 +8,10 @@
     "eject": "expo eject",
     "test": "jest"
   },
-  "jest":{
+  
+  "jest": {
     "preset": "react-native"
   },
-
   "dependencies": {
     "@react-native-async-storage/async-storage": "~1.15.0",
     "@react-native-community/datetimepicker": "^3.5.2",
@@ -40,12 +40,14 @@
     "react-native-screens": "~3.4.0",
     "react-native-vector-icons": "^8.1.0",
     "react-native-web": "~0.13.12",
+    "react-test-renderer": "^17.0.2",
     "set-value": "^4.1.0",
     "tailwind-react-native-classnames": "^1.5.1",
     "xmldom": "^0.6.0"
   },
   "devDependencies": {
-    "@babel/core": "~7.9.0"
+    "@babel/core": "~7.9.0",
+    "jest": "^27.2.5"
   },
   "private": true
 }
