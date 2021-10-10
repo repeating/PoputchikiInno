@@ -34,3 +34,6 @@ We have roughly 70~80% test coverage, mostly render test, **some test don't pass
 ```
 npm run test
 ```
+## Static analyzers (Lint):
+We have used ESLint as a static analyzer for our project and here are analyzer results
+![fix_lint](https://user-images.githubusercontent.com/39200650/136712801-94dee91f-b734-45f4-a831-a73eca71da23.jpg)
