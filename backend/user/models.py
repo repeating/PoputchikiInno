@@ -26,5 +26,3 @@ class Driver(Profile):
 
     pass
 
-class Passenger(Profile):
-    pass

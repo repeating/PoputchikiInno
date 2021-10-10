@@ -86,7 +86,6 @@ def mytrips (request):
                 t.trip_date = t.trip_date.replace('T',' ')
                 size = len(t.trip_date)
                 t.trip_date = t.trip_date[:size-8]
-                print(t.id )
                 phone_number = Profile.objects.get(username = t.driver_name )
                 context.append({'driver_name': t.driver_name, 'mobile_number': str(phone_number.mobile_number) , 'id': t.id , 'destination': t.destination, 'trip_date': t.trip_date
                     , 'number_of_seats':t.number_of_seats, 'pub_date':t.pub_date } )
@@ -104,6 +103,7 @@ def index(request):
         t.trip_date = t.trip_date.replace('T',' ')
         size = len(t.trip_date)
         t.trip_date = t.trip_date[:size-8]
+        print(t.number_of_seats)
         context.append({'driver_name': t.driver_name, 'id': t.id , 'destination': t.destination, 'trip_date': t.trip_date
                     , 'number_of_seats':t.number_of_seats, 'pub_date':t.pub_date} )
     return JsonResponse({'token': context })

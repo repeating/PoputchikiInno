@@ -7,9 +7,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
-from datetime import timezone, datetime
-
-
+from datetime import datetime
 
 class CarTrip(models.Model):
     class Meta:
@@ -37,7 +35,8 @@ class CarTrip(models.Model):
         return trip
 
     def was_published_recently(self):
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+        now = timezone.now()
+        return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
 
 class Relation(models.Model):
