@@ -16,6 +16,10 @@ Our goal to implement a software which basically implements a solution for this 
 
 The RUP Artifacts document that explains all the requirements for our software can be found [here](https://github.com/repeating/PoputchikiInno/blob/main/RUP%20Artifact.pdf).
 
+## How to install and run
+
+To run the software, you should first install and run the backend as described in the Readme file in `/backend` folder. Then, you should install and run the frontend as described in the Readme file in `/frontend` folder.
+
 ## Architecture Decision
 
 ### Back-end
