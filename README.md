@@ -55,19 +55,40 @@ We use relational database as it can easity be integrated with Django framework.
     3. It's scalable in the future when our app has more users
 
 ## Architecture design
+
 <img src="images/architecture design.jpg"/>
 
 ## Sequence diagram
+
 <img src="images/sequence diagram.jpg"/>
 
 ## Data model
+
 <img src="images/data model.jpg"/>
 
+## Solid Principles
 
+We tried to follow some Solid Principles in this project. For example, the **<em>Open/Closed</em>** principle which 
+states that “software entities … should be open for extension, but closed for modification.”.
+
+We've applied it by using the auto module migrations created by Django framework. These migrations allow to change the 
+Django data modules by creating a new migration that adds up something on top of the previous migrations, instead of 
+directly modifying it.
 
 ## Prototype
 
 The prototype of our mobile app can be found [here](https://miro.com/app/board/o9J_lypqN9k=/).
+
+## Glosary 
+
+* **Passenger**: Person who travels by getting free/paid lifts in passing vehicles.
+* **Driver**: Person who gives a passenger a ride.
+* **Trip**: A service offered by the driver to the passenger
+* **General Users**: Passenger and Drivers; Users who do not have administrative privileges
+* **Admin**: User who has administrative privileges
+* **Client**: People who pay for this app
+* **PM**: Project Manager; consultant responsible for or
+* **TL**: Team (Tech) Lead
 
 ## Our team
 - [Fadi Younes](https://t.me/fadi_yn)
