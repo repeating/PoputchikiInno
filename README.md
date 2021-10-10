@@ -75,9 +75,24 @@ We've applied it by using the auto module migrations created by Django framework
 Django data modules by creating a new migration that adds up something on top of the previous migrations, instead of 
 directly modifying it.
 
+## Design patterns
+
+Since we've used Django framework for the backend, we've been using several Fowler's patterns that are implemented by Django. Here are a few of them according to [Django Design Patterns and Best Practices - Second Edition](https://subscription.packtpub.com/book/web_development/9781788831345/1/ch01lvl1sec13/what-is-a-pattern):
+
+| **Fowler pattern**          | **Django component**  | **Explanation**                                                       |
+|-------------------------|-------------------|-------------------------------------------------------------------|
+| Active record           | Django models     | Encapsulate the database access and add domain logic on that data |
+| Class table inheritance | Model inheritance | Each entity in the hierarchy is mapped to a separate table        |
+| Identity field          | ID field          | Saves a database ID field in an object to maintain identity       |
+| Template view           | Django templates  | Render into HTML by embedding markers in HTML                     |
+
 ## Prototype
 
 The prototype of our mobile app can be found [here](https://miro.com/app/board/o9J_lypqN9k=/).
+
+## Demo
+
+The demo of our application can be found [here](https://github.com/repeating/PoputchikiInno/blob/main/Demo.mov?raw=true).
 
 ## Glosary 
 
