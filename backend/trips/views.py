@@ -63,7 +63,12 @@ def register(request):
         data = ast.literal_eval(request.body.decode())
         name = data['hiker_name']
         number = data['trip_number']
-        print(name , number )
+        #name = request.POST.get('hiker_name')
+        #number = request.POST.get('trip_number')
+
+        trip = CarTrip.objects.get(id= number)
+        if len(Relation.objects.filter(trip_number=number)) >= trip.number_of_seats :
+            return JsonResponse({'token': 'trip is already full' })
         relation = Relation.create(trip_number=number,
                                    hiker_name=name,)
         relation.save()
