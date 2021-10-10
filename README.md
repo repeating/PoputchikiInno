@@ -14,7 +14,7 @@ Our goal to implement a software which basically implements a solution for this 
 
 ## Rational Unified Process: Artifacts
 
-The RUP Artifacts document that explains all the requirements for our software can be found [here](https://github.com/repeating/PoputchikiInno/blob/main/RUP%20Artifact.pdf)
+The RUP Artifacts document that explains all the requirements for our software can be found [here](https://github.com/repeating/PoputchikiInno/blob/main/RUP%20Artifact.pdf).
 
 ## Architecture Decision
 
