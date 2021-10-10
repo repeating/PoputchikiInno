@@ -28,3 +28,9 @@ After expo start your prowser will load the following page
 Click run on Android device/emulator if you have an emulator on your PC
 
 Or scan QR-code using Expo application on your physical device
+
+## Unit-testing
+We have roughly 70~80% test coverage, mostly render test, to see the result:
+```
+npm run test
+```
