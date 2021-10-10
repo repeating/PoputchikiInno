@@ -58,8 +58,9 @@ def login(request):
 @csrf_exempt
 def signup(request):
     if request.method == 'POST':
-        
-     #   for front end:   
+
+        #for front end:
+        '''
         data = ast.literal_eval(request.body.decode())
         user = Profile.objects.create_user(username=data['username'],
                                            password=data['password'],
@@ -70,19 +71,20 @@ def signup(request):
         
         return JsonResponse({'token': user.username})
         '''
-        for back end:  
+        #for backend
+
         user = Profile.objects.create_user(username=request.POST.get('username'),
                                            password=request.POST.get('password1'),
                                            first_name=request.POST.get('first_name'),
                                            last_name=request.POST.get('last_name'),
                                            email=request.POST.get('email'),
                                            mobile_number=request.POST.get('mobile_number'))
-      
-
-        return JsonResponse({'token': request.POST.get('username')})'''
+        user.save()
+        return JsonResponse({'token': request.POST.get('username')})
     else :
         form = ProfileSignupForm()
     return render(request , 'user/signup.html' , {'form': form})
+
 
 
 def logout(request, user_id):

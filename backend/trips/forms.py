@@ -16,3 +16,9 @@ class RelationCreationForm(ModelForm):
     class Meta:
         model = Relation
         fields = ['trip_number', 'hiker_name' ]
+
+class AddNameForm(ModelForm):
+
+    class Meta:
+        model = CarTrip
+        fields = ['driver_name' ]

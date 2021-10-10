@@ -49,7 +49,7 @@ class Relation(models.Model):
     hiker_name = models.CharField(max_length=200)
 
     def __str__(self ):
-        return f'{self.hiker_name} going on trip id id = {self.trip_number}'
+        return f'{self.hiker_name} going on trip id = {self.trip_number}'
 
     @classmethod
     def create(cls , trip_number, hiker_name):
