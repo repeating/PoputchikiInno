@@ -60,7 +60,7 @@ def signup(request):
     if request.method == 'POST':
 
         #for front end:
-        '''
+        
         data = ast.literal_eval(request.body.decode())
         user = Profile.objects.create_user(username=data['username'],
                                            password=data['password'],
@@ -68,6 +68,7 @@ def signup(request):
                                            last_name=data['last_name'],
                                            email=data['email'],
                                            mobile_number=data['mobile_number'])
+        user.save()
         
         return JsonResponse({'token': user.username})
         '''
@@ -79,7 +80,8 @@ def signup(request):
                                            last_name=request.POST.get('last_name'),
                                            email=request.POST.get('email'),
                                            mobile_number=request.POST.get('mobile_number'))
-        user.save()
+                                           '''
+        
         return JsonResponse({'token': request.POST.get('username')})
     else :
         form = ProfileSignupForm()

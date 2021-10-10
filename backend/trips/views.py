@@ -48,7 +48,6 @@ def create(request):
                               number_of_seats=data['number_of_seats'],
                               trip_date=data['trip_date']
                               )
-        return JsonResponse({'token': data['driver_name'] })
 
         trip.save()
 
@@ -61,14 +60,16 @@ def create(request):
 @csrf_exempt
 def register(request):
     if request.method == 'POST':
-         name = request.POST.get('hiker_name')
-         number = request.POST.get('trip_number')
-         relation = Relation.create(trip_number=number,
+        data = ast.literal_eval(request.body.decode())
+        name = data['hiker_name']
+        number = data['trip_number']
+        print(name , number )
+        relation = Relation.create(trip_number=number,
                                    hiker_name=name,)
-         relation.save()
-         print(name , number )
+        relation.save()
+        
 
-         return JsonResponse({'token': 'done' })
+        return JsonResponse({'token': 'done' })
     else :
         form = RelationCreationForm( )
         return render(request, 'trips/register.html', {'form' : form})
@@ -77,14 +78,15 @@ def register(request):
 @csrf_exempt
 def mytrips (request):
     if request.method == 'POST':
-        name = request.POST.get('driver_name')
+        data = ast.literal_eval(request.body.decode())
+        name = data['driver_name']
         context = []
         for persone in Relation.objects.filter( hiker_name = name ) :
             for t in CarTrip.objects.filter( id = persone.trip_number ) :
                 t.trip_date = t.trip_date.replace('T',' ')
                 size = len(t.trip_date)
-                t.trip_date = t.trip_date[:size]
-                print(t.driver_name )
+                t.trip_date = t.trip_date[:size-8]
+                print(t.id )
                 phone_number = Profile.objects.get(username = t.driver_name )
                 context.append({'driver_name': t.driver_name, 'mobile_number': str(phone_number.mobile_number) , 'id': t.id , 'destination': t.destination, 'trip_date': t.trip_date
                     , 'number_of_seats':t.number_of_seats, 'pub_date':t.pub_date } )
@@ -101,12 +103,9 @@ def index(request):
     for t in CarTrip.objects.all() :
         t.trip_date = t.trip_date.replace('T',' ')
         size = len(t.trip_date)
-        t.trip_date = t.trip_date[:size]
-        hikers = []
-        for person in Relation.objects.filter( trip_number = t.id) :
-            hikers.append(person.hiker_name)
+        t.trip_date = t.trip_date[:size-8]
         context.append({'driver_name': t.driver_name, 'id': t.id , 'destination': t.destination, 'trip_date': t.trip_date
-                    , 'number_of_seats':t.number_of_seats, 'pub_date':t.pub_date , 'hikers':hikers} )
+                    , 'number_of_seats':t.number_of_seats, 'pub_date':t.pub_date} )
     return JsonResponse({'token': context })
 
 

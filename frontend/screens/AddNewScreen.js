@@ -67,6 +67,19 @@ const AddNewScreen = ({navigation}) => {
         'trip_date': date
         })
         });
+    let res = await response.json();
+
+    console.log(res)
+  
+    const token = res.token;
+
+    if (token.length != 0){
+      Alert.alert('Trip is created!', 'Your trip has been successfully created.', [
+          {text: 'Okay'}
+      ]);
+      return;
+  }
+    
   };
  
   return (

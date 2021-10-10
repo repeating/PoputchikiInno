@@ -20,10 +20,12 @@ import { DrawerContent } from './screens/DrawerContent';
 
 import MainTabScreen from './screens/MainTabScreen';
 import AboutUsScreen from './screens/AboutUsScreen';
+import MapScreen from './screens/MapScreen';
 
 import RootStackScreen from './screens/RootStackScreen';
 import { AuthContext } from './components/context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const Drawer = createDrawerNavigator();
 
@@ -181,6 +183,7 @@ const App = () => {
         }} initialRouteName="Home">
           <Drawer.Screen name="Home" component={MainTabScreen} />
           <Drawer.Screen name="About us" component={AboutUsScreen} />
+          <Drawer.Screen name="Map" component={MapScreen} />
       </Drawer.Navigator>
       )
       :

@@ -33,12 +33,12 @@ export function DrawerContent(props) {
                     <View style={styles.userInfoSection}>
                         <View style={{flexDirection:'row',marginTop: 15}}>
                             <Avatar.Image 
-                                source={require('../img/karam.jpg')}
+                                source={require('../img/pp.jpg')}
                                 size={50}
                             />
                             <View style={{marginLeft:15, flexDirection:'column'}}>
-                                <Title style={styles.title}>Karam Shbeb</Title>
-                                <Caption style={styles.caption}>@karamshbeb</Caption>
+                                <Title style={styles.title}>{global.Var}</Title>
+                                <Caption style={styles.caption}>@{global.Var}</Caption>
                             </View>
                         </View>
 
@@ -94,6 +94,17 @@ export function DrawerContent(props) {
                             )}
                             label="Profile"
                             onPress={() => {props.navigation.navigate('Profile')}}
+                        />
+                        <DrawerItem 
+                            icon={({color, size}) => (
+                                <Icon 
+                                name="map" 
+                                color={color}
+                                size={size}
+                                />
+                            )}
+                            label="Map"
+                            onPress={() => {props.navigation.navigate('Map')}}
                         />
                         <DrawerItem 
                             icon={({color, size}) => (
