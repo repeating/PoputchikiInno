@@ -36,4 +36,4 @@ npm run test
 ```
 ## Static analyzers (Lint):
 We have used ESLint as a static analyzer for our project and here are analyzer results
-![fix_lint](https://user-images.githubusercontent.com/39200650/136712801-94dee91f-b734-45f4-a831-a73eca71da23.jpg)
+![lint](https://user-images.githubusercontent.com/39200650/136712817-553996fd-82df-4726-976b-83d5fe13c9ce.png)
