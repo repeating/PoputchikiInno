@@ -6,6 +6,10 @@ This is a mobile app for hitchhiking between Innopolis and Kazan. In the app, th
 
 There will also be many functionalites avaialbe for both driver and passenger such as canceling the ride, canceling the trip, contacting driver/passenger, etc.
 
+## Rational Unified Process: Artifacts
+
+The RUP Artifacts document that explains all the requirements for our software can be found [here](https://github.com/repeating/PoputchikiInno/blob/main/RUP%20Artifact.pdf)
+
 ## What problem are we solving?
 
 Most of Innopolis residents and workers suffer from the lack of public transportation between Kazan and Innopolis. Therefore, most of "Innopolisians" try to find a ride with someone driving from Kazan to Innopolis or vice versa. People try to solve this problem using a Telegram chat [Попутчики Иннополис](https://t.me/joinchat/BZaU2UDW8zpUizpiMvDRQA) with around 3000 users.
