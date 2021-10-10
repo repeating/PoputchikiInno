@@ -4,10 +4,9 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 import tw from "tailwind-react-native-classnames";
 import Map from "../components/Map";
 
-GOOGLE_MAPS_APIKEY = "AIzaSyBuSRaU4rXijXU8OWT6zzGVUQEcMxfCQ5k"
+GOOGLE_MAPS_APIKEY = "AIzaSyBuSRaU4rXijXU8OWT6zzGVUQEcMxfCQ5k";
 
 const MapScreen = ({ navigation }) => {
-
   return (
     <View style={[tw`h-full`]}>
       <GooglePlacesAutocomplete
@@ -19,16 +18,6 @@ const MapScreen = ({ navigation }) => {
             fontSize: 18,
           },
         }}
-        // onPress={(data, details = null) => {
-        //   dispatch(
-        //     setOrigin({
-        //       location: details.geometry.location,
-        //       description: data.description,
-        //     })
-        //   );
-
-        //   dispatch(setDestination(null)); // Safesafe
-        // }}
         fetchDetails={true}
         returnKeyType={"search"}
         enablePoweredByContainer={false}
