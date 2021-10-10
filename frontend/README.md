@@ -30,7 +30,7 @@ Click run on Android device/emulator if you have an emulator on your PC
 Or scan QR-code using Expo application on your physical device
 
 ## Unit-testing
-We have roughly 70~80% test coverage, mostly render test, to see the result:
+We have roughly 70~80% test coverage, mostly render test, **some test don't pass not because of faulty code but because further turning is required in testing package `jest` to cover non traditional Javascript**, to see the result:
 ```
 npm run test
 ```
