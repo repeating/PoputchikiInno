@@ -101,12 +101,3 @@ def signup(request):
         return JsonResponse({'token': profile.token}, status=200)
     else:
         return JsonResponse({'message': f'Method Not Allowed ({request.method})'}, status=405)
-
-
-def trip_register(request):
-    latest_cartrip_list = CarTrip.objects.all()
-    context = {'latest_cartrip_list': latest_cartrip_list}
-    return render(request, 'trips/trip_register.html', context)
-
-
-
