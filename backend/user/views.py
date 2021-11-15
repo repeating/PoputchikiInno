@@ -29,13 +29,6 @@ from django.views.decorators.http import require_http_methods
 from uuid import uuid4
 
 
-def home(request):
-    content = {
-            'status' : 'request was permitted'
-        }
-    return render(request, 'user/home.html', content)
-
-
 @csrf_exempt
 def login(request):
     """
@@ -65,6 +58,7 @@ def login(request):
             return JsonResponse({'message': 'username or password incorrect'}, status=400)
     else:
         return JsonResponse({'message': f'Method Not Allowed ({request.method})'}, status=405)
+
 
 @csrf_exempt
 def signup(request):
