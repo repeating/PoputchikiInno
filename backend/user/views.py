@@ -29,12 +29,6 @@ from django.views.decorators.http import require_http_methods
 from uuid import uuid4
 
 
-
-class LogOutView(generic.DetailView):
-    model = User
-    template_name = 'user/logout.html'
-
-
 def home(request):
     content = {
             'status' : 'request was permitted'
@@ -107,10 +101,6 @@ def signup(request):
         return JsonResponse({'token': profile.token}, status=200)
     else:
         return JsonResponse({'message': f'Method Not Allowed ({request.method})'}, status=405)
-
-
-def logout(request, user_id):
-    return render(request, 'user/logout.html', {'data': 'data'})
 
 
 def trip_register(request):
