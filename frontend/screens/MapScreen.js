@@ -4,7 +4,7 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 import tw from "tailwind-react-native-classnames";
 import Map from "../components/Map";
 
-GOOGLE_MAPS_APIKEY = "AIzaSyBuSRaU4rXijXU8OWT6zzGVUQEcMxfCQ5k";
+let GOOGLE_MAPS_APIKEY = "AIzaSyBuSRaU4rXijXU8OWT6zzGVUQEcMxfCQ5k";
 
 const MapScreen = ({ navigation }) => {
   return (
