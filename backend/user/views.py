@@ -25,8 +25,10 @@ from .models import Profile
 import ast
 from django.contrib.auth import authenticate
 from trips.models import CarTrip
+from django.views.decorators.http import require_http_methods
+from uuid import uuid4
 
-User = get_user_model()
+
 
 class LogOutView(generic.DetailView):
     model = User
@@ -42,51 +44,69 @@ def home(request):
 
 @csrf_exempt
 def login(request):
+    """
+        JSON POST request sample
+        {
+            "username": "test",
+            "password": "zubi1234",
+            "first_name": "test",
+            "last_name": "test",
+            "email": "test@test.com",
+            "mobile_number": "+71298547"
+        }
+        JSON response sample
+        {
+            "token": "40f6e923-5a62-44cc-8f50-ffc1807aa730"
+        }
+    """
     if request.method == 'POST':
-        data = ast.literal_eval(request.body.decode())
-        #user = authenticate(username=request.POST.get('username'), password=request.POST.get('password'))
+        data = json.loads(request.body)
+
         user = authenticate(username=data['username'], password=data['password'])
+        print(user)
         if user is not None:
-            return JsonResponse({'token': data['username']})
-            #return JsonResponse({'token': request.POST.get('username')})
+            profile = Profile.objects.filter(username=data['username'])[0]
+            return JsonResponse({'token': profile.token}, status=200)
         else:
-            return JsonResponse({'token': ''})
+            return JsonResponse({'message': 'username or password incorrect'}, status=400)
     else:
-        form = ProfileLogInForm()
-    return render(request, 'user/login.html', {'form' : form})
+        return JsonResponse({'message': f'Method Not Allowed ({request.method})'}, status=405)
 
 @csrf_exempt
 def signup(request):
+    """
+    POST request sample
+    {
+        "username": "test",
+        "password": "zubi1234",
+        "first_name": "test",
+        "last_name": "test",
+        "email": "test@test.com",
+        "mobile_number": "+71298547"
+    }
+    """
     if request.method == 'POST':
+        data = json.loads(request.body)
 
-        #for front end:
-        
-        data = ast.literal_eval(request.body.decode())
-        user = Profile.objects.create_user(username=data['username'],
-                                           password=data['password'],
-                                           first_name=data['first_name'],
-                                           last_name=data['last_name'],
-                                           email=data['email'],
-                                           mobile_number=data['mobile_number'])
-        user.save()
-        
-        return JsonResponse({'token': user.username})
-        '''
-        #for backend
+        if len(Profile.objects.filter(username=data['username'])) != 0:
+            return JsonResponse({'message': 'username already taken'}, status=400)
+        if len(Profile.objects.filter(email=data['email'])) != 0:
+            return JsonResponse({'message': 'email address already registered'}, status=400)
+        if len(Profile.objects.filter(mobile_number=data['mobile_number'])) != 0:
+            return JsonResponse({'message': 'mobile number already registered'}, status=400)
 
-        user = Profile.objects.create_user(username=request.POST.get('username'),
-                                           password=request.POST.get('password1'),
-                                           first_name=request.POST.get('first_name'),
-                                           last_name=request.POST.get('last_name'),
-                                           email=request.POST.get('email'),
-                                           mobile_number=request.POST.get('mobile_number'))
-                                           '''
-        
-        return JsonResponse({'token': request.POST.get('username')})
-    else :
-        form = ProfileSignupForm()
-    return render(request , 'user/signup.html' , {'form': form})
+        profile = Profile.objects.create_user(username=data['username'],
+                                              password=data['password'],
+                                              first_name=data['first_name'],
+                                              last_name=data['last_name'],
+                                              email=data['email'],
+                                              mobile_number=data['mobile_number'],
+                                              token=uuid4())
+        profile.save()
 
+        return JsonResponse({'token': profile.token}, status=200)
+    else:
+        return JsonResponse({'message': f'Method Not Allowed ({request.method})'}, status=405)
 
 
 def logout(request, user_id):
