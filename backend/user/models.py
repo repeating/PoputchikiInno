@@ -15,14 +15,8 @@ class Profile(User):
         verbose_name_plural = _('profiles')
 
     mobile_number = PhoneNumberField(null=False, blank=False, unique=True)
+    token = models.CharField(max_length=36)
 
     def __str__(self):
         return f'{self.username} Profile'
-
-class Driver(Profile):
-    class Meta:
-        verbose_name = _('username')
-        verbose_name_plural = _('drivers')
-
-    pass
 
