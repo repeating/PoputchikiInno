@@ -180,6 +180,14 @@ const SignUpScreen = ({navigation}) => {
                 });
 
         let res = await response.json();
+        let stat = response.status;
+
+        if ( stat == 400 ) {
+            Alert.alert('Invalid registration!', res.message, [
+                {text: 'Okay'}
+            ]);
+            return;
+        }
 
         const token = res.token;
         
@@ -197,13 +205,6 @@ const SignUpScreen = ({navigation}) => {
             return;
         }
 
-
-        if ( token.length == 0 ) {
-            Alert.alert('Invalid User!', 'Username or password is incorrect.', [
-                {text: 'Okay'}
-            ]);
-            return;
-        }
 
         const foundUser = { id: 1 , email:user_email  , username: userName , password: password , userToken: token.data };
         Users.push(foundUser)

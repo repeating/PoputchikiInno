@@ -109,6 +109,14 @@ const SignInScreen = ({navigation}) => {
                 });
                 
         let res = await response.json();
+        let stat = response.status;
+
+        if ( stat == 400 ) {
+            Alert.alert('Invalid User!', res.message, [
+                {text: 'Okay'}
+            ]);
+            return;
+        }
 
         const token = res.token;
 
@@ -126,12 +134,6 @@ const SignInScreen = ({navigation}) => {
             return;
         }
 
-        if ( token == '' ) {
-            Alert.alert('Invalid User!', 'Username or password is incorrect.', [
-                {text: 'Okay'}
-            ]);
-            return;
-        }
         const foundUser = { id: 1 , email:"aaa@gmail.com"  , username: userName , password: password , userToken: token.data };
         Users.push(foundUser)
         signIn(foundUser);
