@@ -75,7 +75,6 @@ def signup(request):
     """
     if request.method == 'POST':
         data = json.loads(request.body)
-
         if len(Profile.objects.filter(username=data['username'])) != 0:
             return JsonResponse({'message': 'username already taken'}, status=400)
         if len(Profile.objects.filter(email=data['email'])) != 0:
