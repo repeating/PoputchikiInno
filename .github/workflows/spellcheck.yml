@@ -11,5 +11,5 @@ jobs:
         continue-on-error: true
         uses: ktht/aspell@v2
         with:
-          files: README.md
+          files: *.md
           args: --mode=markdown
