@@ -3,13 +3,13 @@ name: ci
 on: [push]
 
 jobs:
+  
   build:
-
+    
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Run Aspell
+      - uses: actions/checkout@v2
+      - uses: igsekor/pyspelling-any@v0.0.2
         continue-on-error: true
-        uses: ktht/aspell@v2
-        with:
-          files: *.md
-          args: --mode=markdown
+        name: Spellcheck
