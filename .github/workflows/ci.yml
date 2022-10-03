@@ -1,0 +1,16 @@
+name: ci
+
+on: [push]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run Aspell
+  	uses: reitermarkus/aspell@v1.0.0
+	with:
+	  files: README.md
+ 	  args: --mode=markdown
+
