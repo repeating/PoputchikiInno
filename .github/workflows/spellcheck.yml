@@ -1,19 +1,15 @@
-name: Spellcheck
+name: ci
 
 on: [push]
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
-    strategy:
-        matrix:
-        - name: markdown
-          sources:
-          - README.md
-          aspell:
-            lang: en
-            d: en_US
     steps:
-      - uses: actions/checkout@master
-      - uses: rojopolis/spellcheck-github-actions@0.27.0
-        name: markdown
+      - name: Run Aspell
+        continue-on-error: true
+        uses: ktht/aspell@v2
+        with:
+          files: README.md
+          args: --mode=markdown
