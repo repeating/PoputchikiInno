@@ -1,14 +1,16 @@
-name: ci
+name: Spell Checking
 
 on: [push]
 
 jobs:
-  
-  build:
-    
+  check-spelling:
     runs-on: ubuntu-latest
-    
     steps:
-      - uses: actions/checkout@v2
-      - uses: igsekor/pyspelling-any@v0.0.2
-        name: Spellcheck
+      - uses: actions/checkout@v3
+      - name: Install Aspell
+        run: sudo apt install -y aspell
+      - name: Run Spell Checker
+        run: |
+          echo "### README.md" >> $GITHUB_STEP_SUMMARY
+          echo -en "\n" >> $GITHUB_STEP_SUMMARY
+          cat "README.md" | aspell list --mode=markdown --lang=en --encoding utf-8 | sed -e 's/^/- /' >> $GITHUB_STEP_SUMMARY
