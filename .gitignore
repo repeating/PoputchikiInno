@@ -1,3 +1,4 @@
 *.idea/
 *.expo/
 *.DS_Store
+secrets.py
