@@ -11,17 +11,18 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 16.13.0
       - name: Generate coverage report
         run: |
           cd frontend
           npm install
+          npm install jest
           npm test -- --coverage --outputFile coverage
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          directory: ./frontend/coverage/
+          directory: ./frontend/cnodeoverage/
           env_vars: OS,PYTHON
           fail_ci_if_error: false
           files: ./clover.xml
