@@ -1,0 +1,44 @@
+version: '1.0'
+
+
+services:
+  backend:
+    build: ./backend
+    image: reactnative-django-app-api
+    volumes:
+      - ./backend:/backend/
+  backend_migrate:
+    extends:
+      service: backend
+    command: python manage.py migrate
+    image: reactnative-django-app-api
+  backend_run:
+    extends:
+      service: backend
+    command: python manage.py runserver 0.0.0.0:8000
+    image: reactnative-django-app-api
+    depends_on:
+      - backend_migrate
+    ports:
+      - "8000:8000"
+#  react_native_app:
+#    image: reactnative-django-app-api
+#    build:
+#      context: ./frontend
+#      args:
+#        - NODE_ENV=development
+#    environment:
+#      - NODE_ENV=development
+#    tty: true
+#    ports:
+#      - '19006:19006'
+#      - '19001:19001'
+#      - '19002:19002'
+#    volumes:
+#      - ./frontend:/opt/react_native_app/app:delegated
+#      - ./frontend/package.json:/opt/react_native_app/package.json
+#      - ./frontend/package-lock.json:/opt/react_native_app/package-lock.json
+#    healthcheck:
+#      disable: true
+#  volumes:
+#    notused:
