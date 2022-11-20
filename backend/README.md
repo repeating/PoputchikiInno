@@ -1,3 +1,11 @@
+## How to install and run inside a docker container
+
+Open terminal in the main directory and type
+```shell
+docker-compose build
+docker-compose up
+```
+
 ## How to install
 
 Clone the project to your machine, and go to the directory `<cloned_folder>/backend`.
