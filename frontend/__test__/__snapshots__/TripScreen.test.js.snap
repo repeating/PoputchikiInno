@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+      "marginTop": 0,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "fontSize": 20,
+        "fontWeight": "bold",
+        "textAlign": "center",
+      }
+    }
+  >
+    Registered trips
+  </Text>
+  <RCTSafeAreaView
+    emulateUnlessSupported={true}
+    style={
+      Object {
+        "flex": 1,
+        "marginTop": 0,
+      }
+    }
+  >
+    <RCTScrollView
+      data={Array []}
+      disableVirtualization={false}
+      extraData={false}
+      getItem={[Function]}
+      getItemCount={[Function]}
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      onContentSizeChange={[Function]}
+      onEndReachedThreshold={2}
+      onLayout={[Function]}
+      onMomentumScrollEnd={[Function]}
+      onScroll={[Function]}
+      onScrollBeginDrag={[Function]}
+      onScrollEndDrag={[Function]}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      stickyHeaderIndices={Array []}
+      updateCellsBatchingPeriod={50}
+      viewabilityConfigCallbackPairs={Array []}
+      windowSize={21}
+    >
+      <View />
+    </RCTScrollView>
+  </RCTSafeAreaView>
+  <Text
+    style={
+      Object {
+        "fontSize": 20,
+        "fontWeight": "bold",
+        "textAlign": "center",
+      }
+    }
+  >
+    Do you want to Register on more trips?
+  </Text>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "borderColor": "#009387",
+        "borderRadius": 10,
+        "borderWidth": 1,
+        "height": 50,
+        "justifyContent": "center",
+        "marginTop": 15,
+        "opacity": 1,
+        "width": "100%",
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "fontSize": 18,
+            "fontWeight": "bold",
+          },
+          Object {
+            "color": "#009387",
+          },
+        ]
+      }
+    >
+      Search for another trip
+    </Text>
+  </View>
+</View>
+`;
