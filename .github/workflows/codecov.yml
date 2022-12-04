@@ -22,9 +22,9 @@ jobs:
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          directory: ./frontend/cnodeoverage/
+          directory: ./frontend/coverage/
           env_vars: OS,PYTHON
-          fail_ci_if_error: false
+          fail_ci_if_error: true
           files: ./clover.xml
           flags: unittests
           name: codecov-umbrella

@@ -44,7 +44,8 @@
     "react-test-renderer": "^17.0.2",
     "set-value": "^4.1.0",
     "tailwind-react-native-classnames": "^1.5.1",
-    "xmldom": "^0.6.0"
+    "xmldom": "^0.6.0",
+    "yet": "^0.1.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
