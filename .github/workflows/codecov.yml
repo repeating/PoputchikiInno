@@ -23,10 +23,10 @@ jobs:
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          directory: .
+          directory: ./frontend/
           env_vars: OS,PYTHON
-          fail_ci_if_error: true
-          files: ./frontend/coverage.json
+          fail_ci_if_error: false
+          files: ./coverage.json
           flags: unittests
           name: codecov-umbrella
 #          path_to_write_report: ./coverage/codecov_report.txt
