@@ -20,6 +20,11 @@ The RUP Artifacts document that explains all the requirements for our software c
 
 To run the software, you should first install and run the back-end as described in the Readme file in `/backend` folder. Then, you should install and run the front-end as described in the Readme file in `/frontend` folder.
 
+### Run on Docker
+
+You can easily install and run the app, and access it via browser using Docker.
+Simply run the `docker-compose up` and then you'll be able to access the app on `http://localhost:19006`
+
 ## Architecture Decision
 
 ### Back-end
