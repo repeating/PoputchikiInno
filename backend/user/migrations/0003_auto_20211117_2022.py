@@ -7,18 +7,16 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('admin', '0003_logentry_add_action_flag_choices'),
-        ('user', '0002_delete_passenger'),
+        ("admin", "0003_logentry_add_action_flag_choices"),
+        ("user", "0002_delete_passenger"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='profile',
-            name='token',
+            model_name="profile",
+            name="token",
             field=models.CharField(default=django.utils.timezone.now, max_length=36),
             preserve_default=False,
         ),
-        migrations.DeleteModel(
-            name='Driver',
-        ),
+        migrations.DeleteModel(name="Driver",),
     ]

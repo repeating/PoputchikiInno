@@ -11,52 +11,75 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('auth', '0012_alter_user_first_name_max_length'),
+        ("auth", "0012_alter_user_first_name_max_length"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Profile',
+            name="Profile",
             fields=[
-                ('user_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='auth.user')),
-                ('mobile_number', phonenumber_field.modelfields.PhoneNumberField(max_length=128, region=None, unique=True)),
+                (
+                    "user_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="auth.user",
+                    ),
+                ),
+                (
+                    "mobile_number",
+                    phonenumber_field.modelfields.PhoneNumberField(
+                        max_length=128, region=None, unique=True
+                    ),
+                ),
             ],
-            options={
-                'verbose_name': 'username',
-                'verbose_name_plural': 'profiles',
-            },
-            bases=('auth.user',),
-            managers=[
-                ('objects', django.contrib.auth.models.UserManager()),
-            ],
+            options={"verbose_name": "username", "verbose_name_plural": "profiles",},
+            bases=("auth.user",),
+            managers=[("objects", django.contrib.auth.models.UserManager()),],
         ),
         migrations.CreateModel(
-            name='Driver',
+            name="Driver",
             fields=[
-                ('profile_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='user.profile')),
+                (
+                    "profile_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="user.profile",
+                    ),
+                ),
             ],
-            options={
-                'verbose_name': 'username',
-                'verbose_name_plural': 'drivers',
-            },
-            bases=('user.profile',),
-            managers=[
-                ('objects', django.contrib.auth.models.UserManager()),
-            ],
+            options={"verbose_name": "username", "verbose_name_plural": "drivers",},
+            bases=("user.profile",),
+            managers=[("objects", django.contrib.auth.models.UserManager()),],
         ),
         migrations.CreateModel(
-            name='Passenger',
+            name="Passenger",
             fields=[
-                ('profile_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='user.profile')),
+                (
+                    "profile_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="user.profile",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'user',
-                'verbose_name_plural': 'users',
-                'abstract': False,
+                "verbose_name": "user",
+                "verbose_name_plural": "users",
+                "abstract": False,
             },
-            bases=('user.profile',),
-            managers=[
-                ('objects', django.contrib.auth.models.UserManager()),
-            ],
+            bases=("user.profile",),
+            managers=[("objects", django.contrib.auth.models.UserManager()),],
         ),
     ]

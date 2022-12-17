@@ -7,35 +7,47 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='CarTrip',
+            name="CarTrip",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('driver_name', models.CharField(max_length=200)),
-                ('destination', models.CharField(max_length=200)),
-                ('number_of_seats', models.IntegerField(verbose_name='number of seats')),
-                ('trip_date', models.DateTimeField(verbose_name='trip date')),
-                ('pub_date', models.DateTimeField(verbose_name='date published')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("driver_name", models.CharField(max_length=200)),
+                ("destination", models.CharField(max_length=200)),
+                (
+                    "number_of_seats",
+                    models.IntegerField(verbose_name="number of seats"),
+                ),
+                ("trip_date", models.DateTimeField(verbose_name="trip date")),
+                ("pub_date", models.DateTimeField(verbose_name="date published")),
             ],
-            options={
-                'verbose_name': 'carTrip',
-                'verbose_name_plural': 'cartrips',
-            },
+            options={"verbose_name": "carTrip", "verbose_name_plural": "cartrips",},
         ),
         migrations.CreateModel(
-            name='Relation',
+            name="Relation",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('trip_number', models.IntegerField(verbose_name='trip_number')),
-                ('hiker_name', models.CharField(max_length=200)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("trip_number", models.IntegerField(verbose_name="trip_number")),
+                ("hiker_name", models.CharField(max_length=200)),
             ],
-            options={
-                'verbose_name': 'relation',
-                'verbose_name_plural': 'relation',
-            },
+            options={"verbose_name": "relation", "verbose_name_plural": "relation",},
         ),
     ]
