@@ -20,6 +20,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .forms import ProfileSignupForm, ProfileLogInForm
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import parser_classes
 import json
@@ -31,39 +33,35 @@ from django.views.decorators.http import require_http_methods
 from uuid import uuid4
 
 
+@require_POST
 @csrf_exempt
 def login(request):
     """
-        JSON POST request sample
-        {
-            "username": "test",
-            "password": "zubi1234",
-            "first_name": "test",
-            "last_name": "test",
-            "email": "test@test.com",
-            "mobile_number": "+71298547"
-        }
-        JSON response sample
-        {
-            "token": "40f6e923-5a62-44cc-8f50-ffc1807aa730"
-        }
-    """
-    if request.method == "POST":
-        data = json.loads(request.body)
+    JSON POST request sample:
+    {
+        "username": "test",
+        "password": "zubi1234"
+    }
 
-        user = authenticate(username=data["username"], password=data["password"])
-        print(user)
-        if user is not None:
-            profile = Profile.objects.filter(username=data["username"])[0]
-            return JsonResponse({"token": profile.token}, status=200)
-        else:
-            return JsonResponse(
-                {"message": "username or password incorrect"}, status=400
-            )
-    else:
-        return JsonResponse(
-            {"message": f"Method Not Allowed ({request.method})"}, status=405
-        )
+    JSON response sample:
+    {
+        "token": "40f6e923-5a62-44cc-8f50-ffc1807aa730"
+    }
+    """
+
+    data = json.loads(request.body)
+    username = data.get("username")
+    password = data.get("password")
+
+    user = authenticate(username=username, password=password)
+
+    if user is None:
+        return JsonResponse({"message": "Username or password incorrect"}, status=400)
+
+
+    profile = Profile.objects.get(username=username)
+    return JsonResponse({"token": profile.token}, status=200)
+
 
 
 @csrf_exempt
